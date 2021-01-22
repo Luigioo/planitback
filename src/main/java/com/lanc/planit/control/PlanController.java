@@ -15,21 +15,21 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+//@CrossOrigin(origins = "http://localhost:8080")
 public class PlanController {
 
     @Autowired
     private PlanService planService;
 
     //findById
-    @GetMapping("/{id}")
+    @GetMapping("/plan/{id}")
     public Plan findPlan(@PathVariable Integer id){
         Optional ret = planService.find(id);
         return ret.isPresent()?(Plan)ret.get():null;
     }
 
     //find all
-    @GetMapping("/")
+    @GetMapping("/plan")
     public ResponseEntity<List<Plan>> findAllPlans(){
         List<Plan> ret = new LinkedList<Plan>();
         Iterable<Plan> plandata = planService.findAll();
@@ -40,7 +40,7 @@ public class PlanController {
     }
 
     //add/update
-    @PostMapping("/")
+    @PostMapping("/plan")
     public ResponseEntity<Plan> insertPlan(@RequestBody Plan p){
         Plan insertedPlan = planService.add(p);
         if (insertedPlan == null) {
@@ -56,7 +56,7 @@ public class PlanController {
     }
 
     //delete
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/plan/{id}")
     public ResponseEntity<Object> deletePlan(@PathVariable Integer id){
         if(!planService.find(id).isPresent()){
             return new ResponseEntity<Object>("Object not found", HttpStatus.BAD_REQUEST);

@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
