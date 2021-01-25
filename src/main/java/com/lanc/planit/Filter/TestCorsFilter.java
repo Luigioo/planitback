@@ -18,20 +18,20 @@ import java.io.IOException;
 public class TestCorsFilter extends HttpFilter {
 
     private static final long serialVersionUID = 7699L;
-    private static final String Options_METHOD = "OPTIONS";
 
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String origin = request.getHeader(HttpHeaders.ORIGIN);
         System.out.println(request.getMethod());
         if(origin!=null&&origin!=""){
+            response.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, origin);
+            response.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+
             if(request.getMethod().equals("OPTIONS")){
-                response.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, origin);
                 String requestHeaders = request.getHeader(HttpHeaders.ACCESS_CONTROL_REQUEST_HEADERS);
                 if (requestHeaders!=null&&requestHeaders!="") {
                     response.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, requestHeaders);
                 }
-                response.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
                 response.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT, OPTIONS, DELETE");
                 System.out.println("options request from: "+origin);
 
