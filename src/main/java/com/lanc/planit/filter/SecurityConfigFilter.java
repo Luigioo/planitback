@@ -1,6 +1,7 @@
-package com.lanc.planit.Filter;
+package com.lanc.planit.filter;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -17,16 +18,21 @@ public class SecurityConfigFilter extends GenericFilterBean {
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpServletRequest req = (HttpServletRequest) request;
 
+        System.out.println("Security config filter: ");
+        if(SecurityContextHolder.getContext().getAuthentication()!=null){
+            System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+        }
 
-        System.out.println("header: "+resp.getHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN));
-        System.out.println("hs:"+resp.getHeaderNames());
-        //resp.setHeader("Set-Cookie", "locale=de; HttpOnly; SameSite=strict");
+//        System.out.println("header: "+resp.getHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN));
+//        System.out.println("hs:"+resp.getHeaderNames());
+
         String cookie = resp.getHeader("Set-Cookie");
 
-        System.out.println("olala?");
+//        System.out.println("olala?");
         if (cookie != null) {
+            //important for the deployed version
             resp.setHeader("Set-Cookie", cookie + "; Secure; SameSite=none");
-            System.out.println("OLALA: "+ resp.getHeader("Set-Cookie"));
+//            System.out.println("OLALA: "+ resp.getHeader("Set-Cookie"));
         }
         chain.doFilter(request, response);
     }

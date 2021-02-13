@@ -6,24 +6,25 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.Duration;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Plan {
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
+
+    private String name;
+    private int duration;//in seconds
+    private Timestamp start;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private MyUser user;
 
-    private String name;
-    private Timestamp start;
-    private Timestamp end;
-    private boolean allday;
 
 }
