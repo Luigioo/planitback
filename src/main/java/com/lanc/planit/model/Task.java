@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.Duration;
 
@@ -21,6 +22,7 @@ public class Task {
     private String name;
     private int duration;//in seconds
     private Timestamp start;
+    private Timestamp end;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

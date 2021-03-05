@@ -31,7 +31,7 @@ public class SecurityConfigFilter extends GenericFilterBean {
 //        System.out.println("olala?");
         if (cookie != null) {
             //important for the deployed version
-            resp.setHeader("Set-Cookie", cookie + "; Secure; SameSite=none");
+//            resp.setHeader("Set-Cookie", cookie + "; Secure; SameSite=none");
 //            System.out.println("OLALA: "+ resp.getHeader("Set-Cookie"));
         }
         chain.doFilter(request, response);

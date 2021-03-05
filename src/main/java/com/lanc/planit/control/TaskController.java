@@ -4,6 +4,7 @@ import com.lanc.planit.model.MyUser;
 import com.lanc.planit.model.Plan;
 import com.lanc.planit.model.Task;
 import com.lanc.planit.service.MyUserService;
+import com.lanc.planit.service.PlanService;
 import com.lanc.planit.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +22,9 @@ public class TaskController {
 
     @Autowired
     private TaskService taskService;
+
+    @Autowired
+    private PlanService planService;
 
     @Autowired
     private MyUserService uService;
@@ -38,7 +43,8 @@ public class TaskController {
     }
 
     @PostMapping("/task")
-    public ResponseEntity<Object> insertTask(@RequestBody Task task, Principal principal){
+    public ResponseEntity<List<Plan>[]> insertTask(@RequestBody Task task, Principal principal){
+        System.out.println("ola");
         MyUser user = (MyUser) uService.loadUserByUsername(principal.getName());
         task.setUser(user);
         task.setId(null);
@@ -46,12 +52,23 @@ public class TaskController {
         if (insertedTask == null) {
             return ResponseEntity.notFound().build();
         } else {
+            List<Plan> ret = new ArrayList<>();
+            Iterable<Plan> plandata = planService.findAllByUserId(user.getId());
+            for(Plan t:plandata){
+                t.setUser(null);
+                ret.add(t);
+            }
+            List[] options = taskService.getOptions(task, ret);
+        if(options==null){
+            return ResponseEntity.badRequest().build();
+        }
 
-            return ResponseEntity.ok("insertedPlan");
+            return ResponseEntity.ok(options);
         }
     }
     @PutMapping("/task")
     public ResponseEntity<Object> putTask(@RequestBody Task task, Principal principal){
+
         MyUser user = (MyUser) uService.loadUserByUsername(principal.getName());
         task.setUser(user);
         Optional<Task> toc = taskService.find(task.getId());
