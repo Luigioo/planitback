@@ -1,5 +1,8 @@
 package com.lanc.planit.service;
-
+/**
+ * @Author Luigi Lin
+ *
+ */
 import com.lanc.planit.dao.MyUserRepo;
 import com.lanc.planit.model.MyUser;
 import org.springframework.beans.factory.annotation.Autowired;

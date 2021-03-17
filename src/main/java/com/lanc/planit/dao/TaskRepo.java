@@ -1,5 +1,8 @@
 package com.lanc.planit.dao;
-
+/**
+ * @Author Luigi Lin
+ *
+ */
 import com.lanc.planit.model.Plan;
 import com.lanc.planit.model.Task;
 import org.springframework.data.jpa.repository.Query;

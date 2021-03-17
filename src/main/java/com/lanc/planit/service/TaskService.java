@@ -1,5 +1,8 @@
 package com.lanc.planit.service;
-
+/**
+ * @Author Luigi Lin
+ * This is the algorithm part
+ */
 import com.lanc.planit.dao.TaskRepo;
 import com.lanc.planit.model.Plan;
 import com.lanc.planit.model.Task;

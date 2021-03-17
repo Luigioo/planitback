@@ -9,7 +9,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-
+/**
+ * @Author Luigi Lin
+ *
+ */
 public class PlanitApplication {
 
     public static void main(String[] args) {

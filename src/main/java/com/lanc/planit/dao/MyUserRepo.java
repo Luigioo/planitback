@@ -1,5 +1,8 @@
 package com.lanc.planit.dao;
-
+/**
+ * @Author Luigi Lin
+ *
+ */
 import com.lanc.planit.model.MyUser;
 import org.springframework.data.repository.CrudRepository;
 

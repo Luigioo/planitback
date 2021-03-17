@@ -1,5 +1,8 @@
 package com.lanc.planit.model;
-
+/**
+ * @Author Luigi Lin
+ *
+ */
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

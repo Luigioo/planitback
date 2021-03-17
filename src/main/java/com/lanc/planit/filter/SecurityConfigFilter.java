@@ -1,5 +1,8 @@
 package com.lanc.planit.filter;
-
+/**
+ * @Author Luigi Lin
+ *
+ */
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
